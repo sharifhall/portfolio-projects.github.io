@@ -92,4 +92,13 @@ JOIN "CovidVaccinations" AS vac
 	AND dea.date = vac.date
 WHERE dea.continent IS NOT NULL;
 
-
+-- Created View for later visualizations
+CREATE VIEW PercentPopVaccinated AS
+SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations,
+SUM(vac.new_vaccinations) OVER (PARTITION BY dea.location 
+ORDER BY dea.location, dea.date) AS rolling_people_vacc 
+FROM "CovidDeaths" AS dea
+JOIN "CovidVaccinations" AS vac
+	ON dea.location = vac.location
+	AND dea.date = vac.date
+WHERE dea.continent IS NOT NULL;
