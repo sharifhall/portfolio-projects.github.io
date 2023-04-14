@@ -34,13 +34,6 @@ JOIN "CovidVaccinations" AS vac
 WHERE dea.continent IS NOT NULL
 ORDER BY 1, 2;
 
--- SELECT location, MAX(total_deaths) AS Total_Death_Count
--- FROM "CovidDeaths"
--- WHERE continent IS NULL
--- GROUP BY location
--- ORDER BY Total_Death_Count DESC;
-
--- LET'S BREAK THIS DOWN BY CONTINENT
 -- Showing continents with the highest death count per population
 SELECT continent, MAX(total_deaths) AS Total_Death_Count
 FROM "CovidDeaths"
